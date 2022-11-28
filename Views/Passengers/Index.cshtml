@@ -1,0 +1,108 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Cab_Project.Areas.Identity.Data
+
+@inject SignInManager<Cab_ProjectUser> SignInManager
+@inject UserManager<Cab_ProjectUser> UserManager
+
+@model IEnumerable<Cab_Project.Models.Passengers>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    img {
+        align-items:center;
+        width: 1100px;
+        height: 160px;
+    }
+   
+</style>
+
+<body>
+    <img src="/Images/taxi-header.jpg" alt="header" />
+</body>
+
+<h1>Rides</h1>
+
+<p>
+   @* <a asp-action="Create">Create New</a>*@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pickup)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.drop)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            String email = item.email;
+            @if (email == @UserManager.GetUserName(User))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pickup)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.drop)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+            @if (@UserManager.GetUserName(User) == "Ravi@gmail.com" || @UserManager.GetUserName(User) == "Jai@gmail.com" || @UserManager.GetUserName(User) == "kunal@gmail.com")
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pickup)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.drop)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        <a asp-action="Accept" asp-route-id="@item.Id">Accept</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+
+                    </td>
+                </tr>
+            }
+}
+    </tbody>
+</table>

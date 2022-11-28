@@ -1,0 +1,92 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Cab_Project.Areas.Identity.Data
+
+@inject SignInManager<Cab_ProjectUser> SignInManager
+@inject UserManager<Cab_ProjectUser> UserManager
+
+@model IEnumerable<Cab_Project.Models.Rides_Ordered>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-image: url("/Images/Cab-tables.jpg");
+        background-size: contain;
+    }
+
+    table-th {
+        color: white;
+    }
+
+    table-td {
+        color: white;
+    }
+
+    /*h1 {
+        color: white;
+    }*/
+</style>
+
+<body>
+    <h1>Rides_Ordered</h1>
+</body>
+
+
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pickup_location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.drop_location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            @if (@UserManager.GetUserName(User) == item.email)
+            {
+                <tr>
+                    <td>
+                @Html.DisplayFor(modelItem => item.Driver_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pickup_location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.drop_location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            </td>
+        </tr>
+        }
+}
+    </tbody>
+</table>
