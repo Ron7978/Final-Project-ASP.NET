@@ -4,4 +4,4 @@ In this application both the user and driver has to register themselves and then
 Then the user/passenger will different sections such as place your order, your request and I have reached.
 In driver section it will have orders you can accept, your details and your ride on way!!
 
-![image](/wwwroot/Images/Cab-Management-System.jpg)
+![image](/wwwroot/Images/Cab project.jpg)
